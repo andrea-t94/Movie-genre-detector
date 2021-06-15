@@ -30,7 +30,7 @@ For Docker install check out [official documentation](https://docs.docker.com/ge
 - clone repository ```
 $ git clone https://github.com/andrea-t94/Movie-genre-detector.git ```
 - build docker image ```
-$ docker build -t ml-model -f Dockerfile .\ ```
+$ docker build -t ml-model -f Dockerfile . ```\
 Docker build will:
 - install all the dependencies
 -  run a training for deploying the first model
