@@ -3,16 +3,17 @@ import datetime
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import Model
-from keras.layers import Dense, Dropout, Input
+from tensorflow.keras.layers import Dense, Dropout, Input
 from sklearn.metrics import accuracy_score,precision_score, recall_score
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import warnings
 
 #TODO
 #set LOCAL_DIR as env var in Docker
 from configs import LOCAL_DIR
 
-class baselineModel(object):
+class BaselineModel:
+
     def __init__(self, name, uuid = None):
         self.name = name
         self.uuid = str(uuid)
@@ -24,14 +25,15 @@ class baselineModel(object):
     def build(self, input_shape, output_shape, config):
         #define the parameters
         self.config = config
-        self.input_shape = input_shape
-        self.output_shape = output_shape
+        self.input_layer_shape = input_shape
+        self.output_layer_shape = output_shape
+
         #build the model
-        input_layer = Input(shape=self.input_shape)
+        input_layer = Input(shape=self.input_layer_shape)
         x = Dense(self.config["dense"], activation='relu')(input_layer)
         x = Dropout(self.config["dropout"])(x)
-        out = Dense(self.output_shape, activation='softmax')(x)
-        self.model = Model(name='Genre-detector', inputs=input_layer, outputs=out)
+        out = Dense(self.output_layer_shape, activation='softmax')(x)
+        self.model = Model(name='genre-detector', inputs=input_layer, outputs=out)
         self.optimizer = tf.keras.optimizers.Adam(
             learning_rate=self.config["learning_rate"]
         )
@@ -93,14 +95,18 @@ class baselineModel(object):
                     if model_acc > self.best_acc:
                         self.best_acc = model_acc
                         self.best_model_path = tmp_models_subdir + model_file
-                        print(self.best_model_path)
             except:
                 warnings.warn("Problems with directory {}".format(tmp_models_subdir))
         #TODO
         # test if model exists
         if self.best_model_path:
             self.model = load_model(self.best_model_path)
-            print("Model loaded with accuracy: {}".format(self.best_acc))
         else:
             raise FileNotFoundError("No trained model found in {}".format(models_dir))
+
+    def class_prediction(self, input):
+        if hasattr(self, 'model'):
+            return np.argmax(self.model.predict(input, verbose=0), axis=1)
+        else:
+            raise ValueError("No loaded model found, please use load_best_model method before")
 

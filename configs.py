@@ -7,4 +7,6 @@ model_config = dict(
     learning_rate=1e-4,
 )
 
+movielens_col_list = ['genres','original_title','overview']
+
 LOCAL_DIR = '/Users/andreatamburri/Documents/GitHub/Movie-genre-detector/'
