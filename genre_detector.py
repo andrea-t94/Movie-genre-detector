@@ -1,5 +1,4 @@
 import os
-import datetime
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import Model
@@ -13,8 +12,6 @@ class BaselineModel:
     def __init__(self, name, uuid = None):
         self.name = name
         self.uuid = str(uuid)
-        log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        self.log_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
         if uuid:
             os.makedirs("models/" + self.name + "/" + self.uuid)
 
@@ -48,7 +45,6 @@ class BaselineModel:
             batch_size=self.config["batch_size"],
             epochs=self.config["epochs"],
             callbacks=[
-                self.log_callback,
                 tf.keras.callbacks.ModelCheckpoint(
                     filepath= "models/" + self.name + "/" + self.uuid + "/{val_accuracy:.2f}.h5",
                     monitor='val_loss', save_best_only=True, verbose=1)
