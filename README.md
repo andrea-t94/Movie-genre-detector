@@ -14,5 +14,5 @@ ML Detector based on [MovieLens dataset](https://www.kaggle.com/rounakbanik/the-
 For the other requirements check out requirements.txt
 
 ## Installation
-git clone https://github.com/hyperconnect/TC-ResNet.git
+git clone https://github.com/andrea-t94/Movie-genre-detector.git
  
