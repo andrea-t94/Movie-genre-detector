@@ -22,6 +22,8 @@ For the other requirements check out requirements.txt
 /train.py
 /inference.py
 /test.py
+/models #in which stored model trained
+/artifacts #in which stored text processor trained
 /...
 ```
 
@@ -34,7 +36,7 @@ $ docker build -t ml-model -f Dockerfile . ```\
 \
 Docker build will:
 - install all the dependencies
--  run a training for deploying the first model
+-  run a training for deploying the first model (NB. the train will deal with the first model and processor deployment)
 -  test if the build was correctly deployed
 
 ## How to run
