@@ -10,7 +10,7 @@ ML Detector based on [MovieLens dataset](https://www.kaggle.com/rounakbanik/the-
 - python == 3.8.5
 - tensorflow==2.2.0 for Model build and training
 - scikit-learn==0.24.2 for advanced data preprocessing techinques for NLP (e.g. tfidf)
-- pandas==1.2.4 for data ingestion and management
+- pandas==1.2.4 for data ingestion and management /n
 For the other requirements check out requirements.txt
 
 ## Installation
