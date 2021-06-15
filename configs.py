@@ -1,3 +1,4 @@
+#model structure configuration
 model_config = dict(
     model="baseline-genre-detector",
     dense=16,
@@ -7,6 +8,5 @@ model_config = dict(
     learning_rate=1e-4,
 )
 
+#column of interest of MovieLens Dataset
 movielens_col_list = ['genres','original_title','overview']
-
-LOCAL_DIR = '/Users/andreatamburri/Documents/GitHub/Movie-genre-detector/'

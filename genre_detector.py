@@ -8,10 +8,6 @@ from sklearn.metrics import accuracy_score,precision_score, recall_score
 from tensorflow.keras.models import load_model
 import warnings
 
-#TODO
-#set LOCAL_DIR as env var in Docker
-from configs import LOCAL_DIR
-
 class BaselineModel:
 
     def __init__(self, name, uuid = None):
@@ -54,7 +50,7 @@ class BaselineModel:
             callbacks=[
                 self.log_callback,
                 tf.keras.callbacks.ModelCheckpoint(
-                    filepath= LOCAL_DIR + "models/" + self.name + "/" + self.uuid + "/{val_accuracy:.2f}.h5",
+                    filepath= "models/" + self.name + "/" + self.uuid + "/{val_accuracy:.2f}.h5",
                     monitor='val_loss', save_best_only=True, verbose=1)
             ]
         )
@@ -64,12 +60,8 @@ class BaselineModel:
         yhat_classes = np.argmax(self.model.predict(x_test, verbose=0), axis=1)
         Y_test = np.argmax(y_test, axis=-1)
         acc = round(accuracy_score(Y_test, yhat_classes), 4) * 100
-        print('Accuracy: %f' % acc)
         precision = round(precision_score(Y_test, yhat_classes, average='weighted'), 4) * 100
-        print('Precision: %f' % precision)
-        # recall: tp / (tp + fn)
         recall = round(recall_score(Y_test, yhat_classes, average='weighted'), 4) * 100
-        print('Recall: %f' % recall)
         score = {
             "Accuracy %": acc,
             "Precision %": precision,
@@ -82,8 +74,7 @@ class BaselineModel:
 
     def load_best_model(self):
         #directory in which store models with unique uuid
-        #LOCAL_DIR to be discarded
-        models_dir =  LOCAL_DIR + "models/" + self.name + "/"
+        models_dir =  "models/" + self.name + "/"
         self.best_acc = 0
         self.best_model_path = None
         for dirs in os.listdir(models_dir):
@@ -97,8 +88,6 @@ class BaselineModel:
                         self.best_model_path = tmp_models_subdir + model_file
             except:
                 warnings.warn("Problems with directory {}".format(tmp_models_subdir))
-        #TODO
-        # test if model exists
         if self.best_model_path:
             self.model = load_model(self.best_model_path)
         else:

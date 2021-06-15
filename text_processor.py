@@ -9,8 +9,6 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
 from joblib import dump, load
 
-from configs import LOCAL_DIR
-
 class LemmaTokenizer:
     def __init__(self):
         self.wnl = WordNetLemmatizer()
@@ -34,12 +32,14 @@ class TextProcessor:
                  analyzer: Optional[str] = 'word',
                  stop_words: Optional[str] = 'english',
                  strip_accents: Optional[str] = 'unicode',
+                 max_features: Optional[int] = 10000,
                  lowercase: Optional[bool] = True,
                  lemmatizer: Optional[bool] = True
                  ):
         self.analyzer = analyzer
         self.stop_words = stop_words
         self.strip_accents = strip_accents
+        self.max_features = max_features
         self.lowercase = lowercase
         self.lemmatizer = lemmatizer
 
@@ -56,7 +56,8 @@ class TextProcessor:
                                     stop_words=self.stop_words,
                                     strip_accents=self.strip_accents,
                                     lowercase=self.lowercase,
-                                    tokenizer=self.tokenizer)
+                                    tokenizer=self.tokenizer,
+                                    max_features=self.max_features)
             output = self.tfidf.fit_transform(input).toarray()
         return output
 
@@ -76,13 +77,13 @@ class TextProcessor:
             raise ValueError("No loaded encoder found, please encode labels before decoding")
         return output
 
-    def save_processor(self, filepath: Optional[str] = LOCAL_DIR + '/artifacts/'):
+    def save_processor(self, filepath: Optional[str] = 'artifacts/'):
         with open(filepath + 'tfidf_vectorizer.pkl', 'wb') as fw:
             dump(self.tfidf.vocabulary_, fw)
         with open(filepath + 'label_encoder.pkl', 'wb') as fw:
             dump(self.encoder, fw)
 
-    def load_processor(self, filepath: Optional[str] = LOCAL_DIR + '/artifacts/'):
+    def load_processor(self, filepath: Optional[str] = 'artifacts/'):
         self.encoder = load(filepath + "label_encoder.pkl")
         tfidf_dictionary = load(filepath + "tfidf_vectorizer.pkl")
         if self.lemmatizer == True:
