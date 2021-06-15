@@ -15,7 +15,9 @@ For the other requirements check out requirements.txt
 
 ## Installation
 For Docker install check out [official documentation](https://docs.docker.com/get-docker/)\
+- clone repository
 $ git clone https://github.com/andrea-t94/Movie-genre-detector.git \
+- build docker image
 $ docker build -t ml-model -f Dockerfile .
 
  
