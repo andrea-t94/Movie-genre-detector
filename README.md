@@ -14,5 +14,8 @@ ML Detector based on [MovieLens dataset](https://www.kaggle.com/rounakbanik/the-
 For the other requirements check out requirements.txt
 
 ## Installation
-git clone https://github.com/andrea-t94/Movie-genre-detector.git
+For Docker install check out [official documentation](https://docs.docker.com/get-docker/)
+$ git clone https://github.com/andrea-t94/Movie-genre-detector.git
+$ docker build -t ml-model -f Dockerfile .
+
  
