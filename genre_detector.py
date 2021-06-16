@@ -8,7 +8,8 @@ from tensorflow.keras.models import load_model
 import warnings
 
 class BaselineModel:
-
+    '''BaselineModel class, based on a shallow NN.
+    Contains all the methods for model generation and management'''
     def __init__(self, name, uuid = None):
         self.name = name
         self.uuid = str(uuid)

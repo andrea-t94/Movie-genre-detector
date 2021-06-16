@@ -1,7 +1,6 @@
 import re
 import unicodedata
 import nltk
-
 from nltk.stem import WordNetLemmatizer
 from nltk import word_tokenize
 from typing import Optional
@@ -10,6 +9,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from joblib import dump, load
 
 class LemmaTokenizer:
+    '''Tokenizer that applies lemmatization'''
     def __init__(self):
         self.wnl = WordNetLemmatizer()
     def __call__(self, text):
@@ -62,6 +62,7 @@ class TextProcessor:
         return output
 
     def encode_label(self, input):
+        #encode categorical label, e.g. genre_name
         if hasattr(self, 'encoder'):
             output = self.encoder.transform(input)
         else:
@@ -71,6 +72,7 @@ class TextProcessor:
         return output
 
     def decode_label(self, input):
+        #decode int label, e.g. output of model into genre_name
         if hasattr(self, 'encoder'):
             output = self.encoder.inverse_transform(input)
         else:

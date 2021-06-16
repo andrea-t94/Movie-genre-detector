@@ -19,6 +19,7 @@ COPY genre_detector.py ./genre_detector.py
 COPY helpers.py ./helpers.py
 COPY text_processor.py ./text_processor.py
 
+#train and deploy first model
 RUN mkdir -p artifacts/
 RUN python3 train.py
 

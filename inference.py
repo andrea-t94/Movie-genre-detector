@@ -19,7 +19,7 @@ def infer():
     description = args.description
     print(title)
 
-    # model selection
+    #model selection
     try:
         model = BaselineModel(name = "genre-detector")
         model.load_best_model()
@@ -27,7 +27,7 @@ def infer():
     except:
         raise FileNotFoundError("No model found, please run the train.py before!")
 
-    # text processor load
+    #text processor load
     try:
         processor = TextProcessor()
         processor.load_processor()
