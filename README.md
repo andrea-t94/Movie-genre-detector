@@ -1,7 +1,7 @@
 # Movie-genre-detector
 
 ## Abstract
-Deep Learning shallow network for genre detection via tfidf NLP techinque.
+Deep Learning shallow network for genre detection. The data preprocessing has been done via a "classical" NLP techinque such as tf-idf vectorization of the text description and title of a movie.
 
 ## Dataset
 ML Detector based on [MovieLens dataset](https://www.kaggle.com/rounakbanik/the-movies-dataset/version/7#movies_metadata.csv)
