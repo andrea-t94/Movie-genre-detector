@@ -42,7 +42,7 @@ Docker build will:
 
 ## How to run
 Once built the docker image:
-- ```$ docker run ml-model python3 train.py ``` will handle the training and store the new text processor in artifacts directory and the model in model directory
+- ```$ docker run ml-model python3 train.py ``` will handle the training and store the new text processor in artifacts directory and the model in model directory (not necessary, since in the build a model has already been trained)
 - ``` $ docker run ml-model python3 inference.py --title "title" --description "description" ``` will return the genre of the movie
 - ``` $ docker run ml-model bash ./run_test.sh ``` will run the automated test (in which there is an example of inference)
 
