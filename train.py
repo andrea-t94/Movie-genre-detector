@@ -42,7 +42,7 @@ def train():
 
     #training testing dataset prep
     X_train, X_test, y_train, y_test = train_test_split(
-        X_tfidf, y_categorical, test_size=0.2, random_state=0)
+        X_tfidf, y_categorical, test_size=0.2, random_state=63)
 
     #model creation
     model = BaselineModel(name = "genre-detector", uuid = uuid.uuid1())
