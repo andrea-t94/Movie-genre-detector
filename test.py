@@ -7,10 +7,10 @@ import os
 try:
     assert os.path.exists("artifacts")
 except:
-    raise NotADirectoryError("TextProcessor storage directory not found, somethign went wrong with data processing")
+    raise NotADirectoryError("TextProcessor storage directory not found, something went wrong with data processing")
 
 #test model correctly saved
 try:
     assert os.path.exists("models")
 except:
-    raise NotADirectoryError("Model storage directory not found, somethign went wrong with training")
+    raise NotADirectoryError("Model storage directory not found, something went wrong with training")
