@@ -38,7 +38,7 @@ Docker build will:
 - install all the dependencies
 -  run a training for deploying the first model (NB. the train will deal with the first model and processor deployment)
 -  test if the build was correctly deployed\
-### NB. The build could fail due to OOM, for testing purpose it's advidable to decrease the max_features parameters of the TextProcessor instance in the training)
+#### NB. The build could fail due to OOM, for testing purpose it's advisable to decrease the max_features parameters of the TextProcessor instance in the training)
 
 ## How to run
 Once built the docker image:
